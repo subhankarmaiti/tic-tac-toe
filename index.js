@@ -5,6 +5,7 @@ const http = require('http');
 let app = express();
 let server = http.Server(app);
 let io = socketIO(server);
+
 app.get('/api/hello', (req, res) => {
   res.send('Welcome');
 });

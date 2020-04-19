@@ -5,7 +5,9 @@ const http = require('http');
 let app = express();
 let server = http.Server(app);
 let io = socketIO(server);
-
+app.get('/api/hello', (req, res) => {
+  res.send('Welcome');
+});
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
   app.use(express.static('client/build'));

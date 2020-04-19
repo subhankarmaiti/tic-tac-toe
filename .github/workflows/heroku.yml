@@ -11,17 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-      - name: Login to Heroku Container registry
+      - name: Push to heroku
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:login
-      - name: Build and push
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:push -app ${{ secrets.HEROKU_APP_NAME }} web
-      - name: Release
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:release -app ${{ secrets.HEROKU_APP_NAME }} web
+        run: git push -f https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git origin/master:master
